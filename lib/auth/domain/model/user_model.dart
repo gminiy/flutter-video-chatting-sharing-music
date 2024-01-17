@@ -12,5 +12,6 @@ class UserModel with _$UserModel {
     required String nickname,
   }) = _UserModel;
 
-  factory UserModel.fromJson(Map<String, Object?> json) => _$UserModelFromJson(json);
+  factory UserModel.fromJson(Map<String, Object?> json) =>
+      _$UserModelFromJson(json);
 }
