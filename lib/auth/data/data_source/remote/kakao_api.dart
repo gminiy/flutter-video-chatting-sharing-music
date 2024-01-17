@@ -22,6 +22,10 @@ class KakaoApi {
     await UserApi.instance.logout();
   }
 
+  Future<User> getUser() async {
+    return await UserApi.instance.me();
+  }
+
   Future<bool> isValidAccessToken() async {
     try {
       await UserApi.instance.accessTokenInfo();
