@@ -5,4 +5,5 @@ abstract interface class AuthRepository {
   Future<bool> isValidAccessToken();
   Future<UserModel> login();
   Future<void> logout();
+  Future<UserModel> getUserModel();
 }
