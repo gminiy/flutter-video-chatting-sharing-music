@@ -9,7 +9,14 @@ class KakaoApi {
   }
 
   Future<bool> isLogin() async {
-    return await AuthApi.instance.hasToken();
+    try {
+      // accessToken 만료시 accessTokenInfo()에서 자동 갱신
+      // error 발생시 로그인 만료 혹은 로그인 하지 않은 사용자
+      await UserApi.instance.accessTokenInfo();
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   Future<User> login() async {
@@ -28,7 +35,6 @@ class KakaoApi {
 
   Future<bool> isValidAccessToken() async {
     try {
-      // accessToken 만료시 accessTokenInfo()에서 자동 갱신
       await UserApi.instance.accessTokenInfo();
       return true;
     } catch (e) {
