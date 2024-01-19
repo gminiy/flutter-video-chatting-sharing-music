@@ -3,13 +3,17 @@ import 'package:flutter_video_chatting_sharing_music/auth/domain/repository/auth
 
 class GetUserModelUseCase {
   final AuthRepository _repository;
-  UserModel? userModel;
+  UserModel? _userModel;
 
   GetUserModelUseCase({
     required AuthRepository repository,
   }) : _repository = repository;
 
-  Future<UserModel> execute() async {
-    return userModel ?? await _repository.getUserModel();
+  Future<UserModel> execute({bool needRefreshCache = false}) async {
+    if (_userModel == null || needRefreshCache) {
+      _userModel = await _repository.getUserModel();
+    }
+
+    return _userModel!;
   }
 }
