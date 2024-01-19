@@ -1,7 +1,7 @@
 import 'package:flutter_video_chatting_sharing_music/auth/domain/repository/auth_repository.dart';
 
 class IsLoginUseCase {
-  AuthRepository _repository;
+  final AuthRepository _repository;
 
   IsLoginUseCase({
     required AuthRepository repository,
