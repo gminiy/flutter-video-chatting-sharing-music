@@ -5,7 +5,7 @@ extension KakaoUserMapper on User {
   UserModel toUserModel() {
     return UserModel(
       id: id.toString(),
-      nickname: kakaoAccount?.name ?? 'unnamed',
+      nickname: kakaoAccount?.profile?.nickname ?? 'unnamed',
     );
   }
 }
