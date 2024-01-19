@@ -5,7 +5,11 @@ import 'package:flutter_video_chatting_sharing_music/auth/domain/repository/auth
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
 class KakaoAuthRepositoryImpl implements AuthRepository {
-  final _api = KakaoApi();
+  final KakaoApi _api;
+
+  const KakaoAuthRepositoryImpl({
+    required KakaoApi api,
+  }) : _api = api;
 
   @override
   Future<bool> isLogin() async {
