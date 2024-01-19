@@ -17,18 +17,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       body: Center(
-        child: GestureDetector(
-          child: Image.asset(
-            'assets/kakao/kakao_login_medium_wide.png',
-          ),
-          onTap: () async {
-            await viewModel.login();
+        child: viewModel.isLoading
+            ? const CircularProgressIndicator()
+            : GestureDetector(
+                child: Image.asset(
+                  'assets/kakao/kakao_login_medium_wide.png',
+                ),
+                onTap: () async {
+                  await viewModel.login();
 
-            if (!mounted) return;
+                  if (!mounted) return;
 
-            context.go('/');
-          },
-        ),
+                  context.go('/');
+                },
+              ),
       ),
     );
   }

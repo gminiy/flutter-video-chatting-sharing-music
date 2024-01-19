@@ -6,14 +6,20 @@ class LoginViewModel extends ChangeNotifier {
   final LoginUseCase _loginUseCase;
   final AuthStatus _authStatus;
 
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
   LoginViewModel({
     required LoginUseCase loginUseCase,
     required AuthStatus authStatus,
-  })
-      : _loginUseCase = loginUseCase,
+  })  : _loginUseCase = loginUseCase,
         _authStatus = authStatus;
 
   Future<void> login() async {
+    _isLoading = true;
+    notifyListeners();
+
     await _loginUseCase.execute();
     _authStatus.setIsLogin(true);
     notifyListeners();
