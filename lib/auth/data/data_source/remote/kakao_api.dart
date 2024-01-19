@@ -28,6 +28,7 @@ class KakaoApi {
 
   Future<bool> isValidAccessToken() async {
     try {
+      // accessToken 만료시 accessTokenInfo()에서 자동 갱신
       await UserApi.instance.accessTokenInfo();
       return true;
     } catch (e) {
