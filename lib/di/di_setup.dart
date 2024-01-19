@@ -5,11 +5,13 @@ import 'package:flutter_video_chatting_sharing_music/auth/domain/use_case/get_us
 import 'package:flutter_video_chatting_sharing_music/auth/domain/use_case/is_login_use_case.dart';
 import 'package:flutter_video_chatting_sharing_music/auth/domain/use_case/login_use_case.dart';
 import 'package:flutter_video_chatting_sharing_music/auth/domain/use_case/logout_use_case.dart';
+import 'package:flutter_video_chatting_sharing_music/auth/presentation/login/login_view_model.dart';
+import 'package:flutter_video_chatting_sharing_music/auth/presentation/auth_status.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
 
-void diSetup() {
+void diSetup() async {
   getIt.registerSingleton<KakaoApi>(KakaoApi());
   getIt
       .registerSingleton<AuthRepository>(KakaoAuthRepositoryImpl(api: getIt()));
@@ -18,4 +20,8 @@ void diSetup() {
   getIt.registerSingleton<IsLoginUseCase>(IsLoginUseCase(repository: getIt()));
   getIt.registerSingleton<LoginUseCase>(LoginUseCase(repository: getIt()));
   getIt.registerSingleton<LogoutUseCase>(LogoutUseCase(repository: getIt()));
+  getIt.registerSingleton<AuthStatus>(AuthStatus());
+  getIt.registerFactory<LoginViewModel>(
+    () => LoginViewModel(loginUseCase: getIt(), authStatus: getIt()),
+  );
 }
